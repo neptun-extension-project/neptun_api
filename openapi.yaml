@@ -26,6 +26,11 @@ servers:
   - url: https://neptunweb1.metropolitan.hu/hallgato/api
   - url: https://neptunweb2.metropolitan.hu/hallgato/api
   - url: https://www-h-ng.neptun.unideb.hu/hallgato_ng/api
+  - url: https://hallgato1.neptun.elte.hu/
+  - url: https://hallgato2.neptun.elte.hu/
+  - url: https://hallgato3.neptun.elte.hu/
+  - url: https://hallgato4.neptun.elte.hu/
+  - url: https://hallgato5.neptun.elte.hu/
 paths:
   /Account/Authenticate:
     post:
