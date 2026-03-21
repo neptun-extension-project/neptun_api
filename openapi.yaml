@@ -64,6 +64,41 @@ paths:
                 - token
                 - LCID
       responses:
+        '200':
+          description: Successful authentication
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      neptunCode:
+                        type: string
+                      accessToken:
+                        type: string
+                      numberOfDaysUntilADPasswordExpires:
+                        type: integer
+                      isCaptchaRequired:
+                        type: boolean
+                      isTwoFactorRequired:
+                        type: boolean
+                      refreshTokenExpiration:
+                        type: string
+                        format: date-time
+                  notification:
+                    type: array
+                    items: {}
+              example:
+                data:
+                  neptunCode: "ASDFGH"
+                  accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJTZXNzaW9uSWQiOiJiYTg4MDUxYi1jYTAyLTQ4ZTctOGY2NS0xNDNmYzVmNDcyOTkiLCJXZWJTZXNzaW9uVHlwZSI6IkhhbGxnYXRvaSIsImp0aSI6ImI1NjUxOTllLTJiMmEtNGYwNC1iYWYyLWYzYWU2MzE4ZGViOSIsInJvbGUiOiJTdHVkZW50IiwibmJmIjoxNzc0MTExMTExLCJleHAiOjE3NzQxMTE0MTEsImlhdCI6MTc3NDExMTExMSwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NDQzNzciLCJhdWQiOiJOZXB0dW5XZWJDbGllbnQifQ.7vd1GINk3wFyWuEzDMVVA00_HueEXRQFBqA75DtmSPc"
+                  numberOfDaysUntilADPasswordExpires: -1
+                  isCaptchaRequired: false
+                  isTwoFactorRequired: false
+                  refreshTokenExpiration: "2026-03-21T17:09:39.0188889Z"
+                notification: []
         '401':
           description: Authentication response
           content:
