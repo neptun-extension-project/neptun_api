@@ -1,0 +1,184 @@
+openapi: 3.0.3
+info:
+  title: Neptun API
+  version: 1.0.0
+  description: OpenAPI spec for the new (Angular) version of Neptun. [Cors Everywhere](https://addons.mozilla.org/en-US/firefox/addon/cors-everywhere/) extension is recommended for testing the API.
+servers:
+  - url: https://host.sdakft.hu/drhehw/api
+  - url: https://host.sdakft.hu/mtfhw/api
+  - url: https://host.sdakft.hu/tkbfhw/api
+  - url: https://nappw.dfad.duf.hu/hallgato_ng/api
+  - url: https://neptun-hweb.sze.hu/hallgato_ng/api
+  - url: https://neptun-web1.tr.pte.hu/hallgatoing/api
+  - url: https://neptun-ws01.uni-pannon.hu/hallgato/api
+  - url: https://neptun.ejf.hu/hallgato_ng/api
+  - url: https://neptun.gde.hu/hallgato/api
+  - url: https://neptun.kodolanyi.hu/hallgato_NG/api
+  - url: https://neptun.or-zse.hu/hallgato/api
+  - url: https://neptun.szte.hu/hallgato/api
+  - url: https://neptun.tf.hu/hallgato/api
+  - url: https://neptun.uni-milton.hu/hallgato/api
+  - url: https://neptun.univet.hu/ate_hw/api
+  - url: https://neptun.vhf.hu/hallgato_ng/api
+  - url: https://neptun2.ppke.hu/hallgato_uj/api
+  - url: https://neptun3r.web.uni-corvinus.hu/Hallgatoi/api
+  - url: https://neptunweb.uni-nke.hu/hallgato_ng/api
+  - url: https://neptunweb1.metropolitan.hu/hallgato/api
+  - url: https://neptunweb2.metropolitan.hu/hallgato/api
+  - url: https://www-h-ng.neptun.unideb.hu/hallgato_ng/api
+paths:
+  /Account/Authenticate:
+    post:
+      summary: Authenticate user
+      operationId: authenticateUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userName:
+                  type: string
+                password:
+                  type: string
+                captcha:
+                  type: string
+                captchaIdentifier:
+                  type: string
+                token:
+                  type: string
+                LCID:
+                  type: integer
+              required:
+                - userName
+                - password
+                - captcha
+                - captchaIdentifier
+                - token
+                - LCID
+      responses:
+        '401':
+          description: Authentication response
+          content:
+            application/json:
+              schema:
+                type: string
+                example: "Érvénytelen felhasználónév vagy jelszó."
+  /General/GetHWebErrorReportingEmailSystemParameter:
+    get:
+      summary: Get error reporting email address
+      operationId: getHWebErrorReportingEmailSystemParameter
+      responses:
+        '200':
+          description: Returns the error reporting email address (nullable)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      emailAddress:
+                        type: [string, 'null']
+                        nullable: true
+                        description: The error reporting email address, or null if not set.
+                  notification:
+                    type: array
+                    items: {}
+  /General/EnvironmentData:
+    get:
+      summary: Get environment data
+      operationId: getEnvironmentData
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      loginUrl:
+                        type: [string, 'null']
+                        nullable: true
+                      logoutUrl:
+                        type: [string, 'null']
+                        nullable: true
+                      version:
+                        type: string
+                        description: The version of the Neptun server.
+                      generationDate:
+                        type: string
+                        format: date-time
+                        description: Build time of the Neptun server.
+                      instituteCode:
+                        type: string
+                      instituteNames:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            lcid:
+                              type: integer
+                      testSystem:
+                        type: boolean
+                      logUIErrors:
+                        type: boolean
+                      isResetPasswordLinkVisible:
+                        type: boolean
+                      neptunDebugEnabled:
+                        type: boolean
+                      systemParameters:
+                        type: object
+                        properties:
+                          isVirtualspaceFolderDescriptionRequired:
+                            type: boolean
+                          isSubstitutionReadonly:
+                            type: boolean
+                      serverName:
+                        type: string
+                      remainingSession:
+                        type: integer
+                        description: The Neptun server's remaining free user seats.
+                      supportedLanguages:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            code:
+                              type: string
+                            name:
+                              type: string
+                            lcid:
+                              type: integer
+                            selected:
+                              type: boolean
+                  notification:
+                    type: array
+                    items: {}
+  /General/Institute:
+    get:
+      summary: Get institution image
+      operationId: getInstitutionImage
+      responses:
+        '200':
+          description: Institution image. They promised to put this on a CDN. No CDN so far. ¯\\_(ツ)_/¯
+          content:
+            image/png:
+              schema:
+                type: string
+                format: binary
+            image/jpeg:
+              schema:
+                type: string
+                format: binary
+            image/svg+xml:
+              schema:
+                type: string
+                format: binary
