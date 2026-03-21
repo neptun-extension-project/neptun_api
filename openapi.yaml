@@ -223,3 +223,71 @@ paths:
               schema:
                 type: string
                 format: binary
+
+  /UserInfo:
+    get:
+      summary: Get user info
+      description: Returns information about the authenticated user. Requires Authorization header with Bearer token.
+      operationId: getUserInfo
+      parameters:
+        - in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+          example: "Bearer <JWT>"
+          description: Bearer token for authentication.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      userStatus:
+                        type: integer
+                      studentTrainingId:
+                        type: string
+                        format: uuid
+                      userAvatar:
+                        type: object
+                        properties:
+                          avatarType:
+                            type: integer
+                          image:
+                            type: [string, 'null']
+                            nullable: true
+                          fallbackColorCodeInHexa:
+                            type: string
+                          printName:
+                            type: string
+                      name:
+                        type: string
+                      neptunCode:
+                        type: string
+                      substitutePrintName:
+                        type: [string, 'null']
+                        nullable: true
+                      isTokenRegistered:
+                        type: boolean
+                  notification:
+                    type: array
+                    items: {}
+              example:
+                data:
+                  userStatus: 32
+                  studentTrainingId: "19fc1bb0-1c96-461a-a91c-4329d4fe75b4"
+                  userAvatar:
+                    avatarType: 1
+                    image: null
+                    fallbackColorCodeInHexa: "12CAA1"
+                    printName: "Nagy Júia"
+                  name: "Nagy Júia"
+                  neptunCode: "ASDFGH"
+                  substitutePrintName: null
+                  isTokenRegistered: false
+                notification: []
