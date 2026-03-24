@@ -3,6 +3,23 @@ info:
   title: Neptun API
   version: 1.0.0
   description: OpenAPI spec for the new (Angular) version of Neptun. [Cors Everywhere](https://addons.mozilla.org/en-US/firefox/addon/cors-everywhere/) extension is recommended for testing the API.
+components:
+  schemas:
+    Notification:
+      type: object
+      properties:
+        type:
+          type: integer
+          description: Notification type (0=Warning, 1=Information, 3=HandledError)
+        title:
+          type: [string, 'null']
+          nullable: true
+        description:
+          type: string
+    NotificationArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/Notification'
 servers:
   - url: https://host.sdakft.hu/drhehw/api
   - url: https://host.sdakft.hu/mtfhw/api
@@ -88,8 +105,7 @@ paths:
                         type: string
                         format: date-time
                   notification:
-                    type: array
-                    items: {}
+                    $ref: '#/components/schemas/NotificationArray'
               example:
                 data:
                   neptunCode: "ASDFGH"
@@ -126,8 +142,7 @@ paths:
                         nullable: true
                         description: The error reporting email address, or null if not set.
                   notification:
-                    type: array
-                    items: {}
+                    $ref: '#/components/schemas/NotificationArray'
   /General/EnvironmentData:
     get:
       summary: Get environment data
@@ -201,8 +216,7 @@ paths:
                             selected:
                               type: boolean
                   notification:
-                    type: array
-                    items: {}
+                    $ref: '#/components/schemas/NotificationArray'
   /General/Institute:
     get:
       summary: Get institution image
@@ -275,8 +289,7 @@ paths:
                       isTokenRegistered:
                         type: boolean
                   notification:
-                    type: array
-                    items: {}
+                    $ref: '#/components/schemas/NotificationArray'
               example:
                 data:
                   userStatus: 32
