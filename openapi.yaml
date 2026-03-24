@@ -304,3 +304,81 @@ paths:
                   substitutePrintName: null
                   isTokenRegistered: false
                 notification: []
+
+  /MyTrainings:
+    get:
+      summary: Get student trainings
+      operationId: getMyTrainings
+      responses:
+        '200':
+          description: List of student trainings
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        studentTrainingId:
+                          type: string
+                          format: uuid
+                        startingDate:
+                          type: string
+                          format: date-time
+                        code:
+                          type: string
+                        enrolmentYear:
+                          type: string
+                        faculty:
+                          type: string
+                        trainingName:
+                          type: string
+                        isArchived:
+                          type: boolean
+                        trainingLevel:
+                          type: string
+                        language:
+                          type: string
+                        hasTermForTraining:
+                          type: boolean
+                        hasActualTerm:
+                          type: boolean
+                        isClosedTraining:
+                          type: boolean
+                        actualTermId:
+                          type: [string, 'null']
+                          nullable: true
+                  notification:
+                    $ref: '#/components/schemas/NotificationArray'
+              example:
+                data:
+                  - studentTrainingId: "00a2202e-4c79-46c6-970a-b5fc98ab30ac"
+                    startingDate: "2020-09-01T00:00:00"
+                    code: "5N-A8"
+                    enrolmentYear: "2020/21/1"
+                    faculty: "Nappali"
+                    trainingName: "Mérnök informatikus szak, alapképzés"
+                    isArchived: false
+                    trainingLevel: "alapképzés (BA/BSc/BProf)"
+                    language: "magyar"
+                    hasTermForTraining: true
+                    hasActualTerm: false
+                    isClosedTraining: true
+                    actualTermId: null
+                  - studentTrainingId: "3caf9220-b080-4866-9f21-54d2858bdf81"
+                    startingDate: "2024-02-01T00:00:00"
+                    code: "5N-M8"
+                    enrolmentYear: "2023/24/2"
+                    faculty: "Nappali"
+                    trainingName: "Mérnök informatikus szak, mesterképzés"
+                    isArchived: false
+                    trainingLevel: "mesterképzés (MA/MSc)"
+                    language: "magyar"
+                    hasTermForTraining: true
+                    hasActualTerm: true
+                    isClosedTraining: false
+                    actualTermId: "09f8846a-577a-4109-a580-caa0aa9b2eb8"
+                notification: []
