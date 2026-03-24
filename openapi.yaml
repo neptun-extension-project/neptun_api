@@ -305,10 +305,48 @@ paths:
                   isTokenRegistered: false
                 notification: []
 
+  /Account/GetNewTokens:
+    post:
+      summary: Get new access token
+      description: Returns a new access token.
+      operationId: getNewTokens
+      parameters:
+        - in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+          example: "Bearer <JWT>"
+          description: Bearer token for authentication.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accessToken:
+                    type: string
+                  refreshTokenExpiration:
+                    type: string
+                    format: date-time
+              example:
+                accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJTZXNzaW9uSWQiOiJiYTg4MDUxYi1jYTAyLTQ4ZTctOGY2NS0xNDNmYzVmNDcyOTkiLCJXZWJTZXNzaW9uVHlwZSI6IkhhbGxnYXRvaSIsImp0aSI6ImI1NjUxOTllLTJiMmEtNGYwNC1iYWYyLWYzYWU2MzE4ZGViOSIsInJvbGUiOiJTdHVkZW50IiwibmJmIjoxNzc0MTExMTExLCJleHAiOjE3NzQxMTE0MTEsImlhdCI6MTc3NDExMTExMSwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NDQzNzciLCJhdWQiOiJOZXB0dW5XZWJDbGllbnQifQ.7vd1GINk3wFyWuEzDMVVA00_HueEXRQFBqA75DtmSPc"
+                refreshTokenExpiration: "2026-03-24T10:18:08.1481343Z"
+
   /MyTrainings:
     get:
       summary: Get student trainings
       operationId: getMyTrainings
+      parameters:
+        - in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+          example: "Bearer <JWT>"
+          description: Bearer token for authentication.
       responses:
         '200':
           description: List of student trainings
