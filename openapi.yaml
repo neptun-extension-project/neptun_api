@@ -52,6 +52,8 @@ servers:
 paths:
   /Account/Authenticate:
     post:
+      tags:
+        - Account
       summary: Authenticate user
       operationId: authenticateUser
       requestBody:
@@ -124,6 +126,8 @@ paths:
                 example: "Érvénytelen felhasználónév vagy jelszó."
   /General/GetHWebErrorReportingEmailSystemParameter:
     get:
+      tags:
+        - General
       summary: Get error reporting email address
       operationId: getHWebErrorReportingEmailSystemParameter
       responses:
@@ -145,6 +149,8 @@ paths:
                     $ref: '#/components/schemas/NotificationArray'
   /General/EnvironmentData:
     get:
+      tags:
+        - General
       summary: Get environment data
       operationId: getEnvironmentData
       responses:
@@ -219,6 +225,8 @@ paths:
                     $ref: '#/components/schemas/NotificationArray'
   /General/Institute:
     get:
+      tags:
+        - General
       summary: Get institution image
       operationId: getInstitutionImage
       responses:
@@ -240,6 +248,8 @@ paths:
 
   /UserInfo:
     get:
+      tags:
+        - Account
       summary: Get user info
       description: Returns information about the authenticated user. Requires Authorization header with Bearer token.
       operationId: getUserInfo
@@ -307,6 +317,8 @@ paths:
 
   /Account/GetNewTokens:
     post:
+      tags:
+        - Account
       summary: Get new access token
       description: Returns a new access token.
       operationId: getNewTokens
@@ -337,6 +349,8 @@ paths:
 
   /MyTrainings:
     get:
+      tags:
+        - Account
       summary: Get student trainings
       operationId: getMyTrainings
       parameters:
