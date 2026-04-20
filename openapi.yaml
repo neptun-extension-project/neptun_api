@@ -434,3 +434,143 @@ paths:
                     isClosedTraining: false
                     actualTermId: "09f8846a-577a-4109-a580-caa0aa9b2eb8"
                 notification: []
+  /Profiles/Favourites:
+    get:
+      tags:
+        - Profiles
+      summary: Get favourite profile menus
+      operationId: getProfilesFavourites
+      parameters:
+        - in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+          example: "Bearer <JWT>"
+          description: Bearer token for authentication.
+      responses:
+        '200':
+          description: Returns favourite profile menus
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        favouriteMenuId:
+                          type: string
+                  notification:
+                    $ref: '#/components/schemas/NotificationArray'
+              example:
+                data:
+                  - favouriteMenuId: "Advancement"
+                  - favouriteMenuId: "ExamResults"
+                  - favouriteMenuId: "FinancialBenefits"
+                  - favouriteMenuId: "Payments"
+                  - favouriteMenuId: "Studies"
+                notification: []
+  /ContextUserProfile/SaveFavouriteMenu:
+    post:
+      tags:
+        - Profiles
+      summary: Save favourite profile menus
+      operationId: saveFavouriteMenu
+      parameters:
+        - in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+          example: "Bearer <JWT>"
+          description: Bearer token for authentication.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                favourites:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      favouriteMenuId:
+                        type: string
+              required:
+                - favourites
+            example:
+              favourites:
+                - favouriteMenuId: "ReclassificationRequest"
+                - favouriteMenuId: "Payments"
+                - favouriteMenuId: "ExamResults"
+                - favouriteMenuId: "Studies"
+      responses:
+        '200':
+          description: Successful save
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: [object, 'null']
+                    nullable: true
+                  notification:
+                    $ref: '#/components/schemas/NotificationArray'
+              example:
+                data: null
+                notification: []
+  /ContextUserProfile/SaveFavouriteMenuReply:
+    post:
+      tags:
+        - Profiles
+      summary: Reply to favourite menu message
+      operationId: saveFavouriteMenuReply
+      parameters:
+        - in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+          example: "Bearer <JWT>"
+          description: Bearer token for authentication.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                messageIdToReply:
+                  type: string
+                  format: uuid
+                postIdToReply:
+                  type: string
+                  format: uuid
+                text:
+                  type: string
+                temporaryFileIds:
+                  type: string
+              required:
+                - messageIdToReply
+                - postIdToReply
+                - text
+                - temporaryFileIds
+            example:
+              messageIdToReply: "uuid"
+              postIdToReply: "uuid"
+              text: "cica!"
+              temporaryFileIds: ""
+      responses:
+        '200':
+          description: Unknown response format
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Response format is currently unknown.
